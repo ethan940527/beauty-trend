@@ -44,7 +44,7 @@
           <span class="${dir(top.growth)}">${spark(top.series, 300, 56, '')}</span>
           <span class="pct">${pct(top.growth)}<small>직전 4주 대비</small></span>
         </div>
-        <span class="more">자세히 보기</span>
+        <span class="more">흐름·관심층 자세히 보기 <svg class="chev" viewBox="0 0 8 14" aria-hidden="true"><path d="M1 1l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </button>` : '';
 
     // 카테고리 칩
@@ -61,6 +61,7 @@
         <span class="nm"><b>${esc(k.name)}</b><span>${esc(k.category)}${k.spike ? ' · <em class="tag">일시 급등</em>' : ''}</span></span>
         <span class="${dir(k.growth)}">${spark(k.series, 72, 26, '')}</span>
         <span class="chg ${dir(k.growth)}">${sort === 'index' ? k.index.toFixed(0) : pct(k.growth)}<small>${sort === 'index' ? pct(k.growth) : '관심도 ' + k.index.toFixed(0)}</small></span>
+        <svg class="chev" viewBox="0 0 8 14" aria-hidden="true"><path d="M1 1l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button></li>`).join('');
 
     // 뉴스

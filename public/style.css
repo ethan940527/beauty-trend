@@ -38,7 +38,9 @@ body.embed .top{display:none}
 .hero .pct small{display:block;font-size:12px;font-weight:500;color:var(--muted)}
 .hero .row>span:first-child{flex:1;min-width:0}
 .hero svg{width:100%;height:56px;display:block}
-.hero .more{display:inline-block;margin-top:10px;font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.hero .more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--ink)}
+.hero .more .chev{width:6px;height:11px}
+.hero button{cursor:pointer}
 
 .board{background:var(--surface);border-radius:18px;padding:14px 0 6px;margin:0 -6px}
 .controls{padding:0 14px}
@@ -52,13 +54,15 @@ body.embed .top{display:none}
 
 .list{list-style:none;margin:6px 0 0;padding:0}
 .list li+li{border-top:1px solid var(--line)}
-.item{display:grid;grid-template-columns:26px 1fr 72px 64px;align-items:center;gap:10px;width:100%;padding:12px 14px;text-align:left}
+.item{display:grid;grid-template-columns:22px 1fr 64px 60px 8px;align-items:center;gap:10px;width:100%;padding:12px 14px;text-align:left;cursor:pointer;transition:background .15s}
+@media (hover:hover){.item:hover{background:var(--bg)}}
+.chev{width:8px;height:14px;color:var(--muted);opacity:.7}
 .item:active{background:var(--bg)}
 .rank{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;text-align:center}
 .nm{min-width:0}
 .nm b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .nm span{font-size:12px;color:var(--muted)}
-.item svg{width:72px;height:26px}
+.item span>svg{width:64px;height:26px}
 .chg{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;font-size:14px}
 .chg small{display:block;font-weight:400;font-size:11px;color:var(--muted)}
 .up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--muted)}
@@ -111,3 +115,4 @@ body.embed .top{display:none}
   @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 }
 .tag{font-style:normal;color:var(--up)}
+.hint{margin:10px 0 0;font-size:12px;color:var(--muted)}

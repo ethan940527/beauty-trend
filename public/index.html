@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F4F5F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121519" media="(prefers-color-scheme: dark)">
+<title>지금 뜨는 미용 시술</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📈</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top" id="top">
+  <h1>지금 뜨는 미용 시술</h1>
+  <p class="sub" id="period"></p>
+</header>
+
+<main id="app">
+  <div class="sample" id="sample" hidden>샘플 데이터로 보이는 화면입니다. 서버에 네이버 API 키를 넣으면 실제 검색 데이터로 바뀝니다.</div>
+
+  <section class="hero" id="hero" aria-live="polite"></section>
+
+  <section class="board">
+    <div class="controls">
+      <div class="seg" role="tablist" aria-label="정렬">
+        <button role="tab" data-sort="growth" aria-selected="true">많이 오른 순</button>
+        <button role="tab" data-sort="index" aria-selected="false">많이 찾는 순</button>
+      </div>
+      <div class="chips" id="chips"></div>
+    </div>
+    <ol class="list" id="list"></ol>
+    <p class="note">관심도는 네이버 검색량을 보톡스 = 100으로 맞춘 상대값이에요. 변화율은 최근 4주와 그 전 4주를 비교했어요.</p>
+  </section>
+
+  <section class="news" id="newsWrap" hidden>
+    <h2>장비·제품 소식</h2>
+    <ul id="news"></ul>
+  </section>
+</main>
+
+<div class="detail" id="detail" hidden role="dialog" aria-modal="true" aria-labelledby="dTitle">
+  <div class="dbar"><button class="back" id="back" aria-label="목록으로">‹ 목록</button></div>
+  <div class="dbody" id="dbody"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

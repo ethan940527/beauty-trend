@@ -17,27 +17,7 @@
 
 <main id="app">
   <div class="sample" id="sample" hidden>샘플 데이터로 보이는 화면입니다. 서버에 네이버 API 키를 넣으면 실제 검색 데이터로 바뀝니다.</div>
-
   <p class="stamp" id="stamp"></p>
-
-  <div class="per" role="tablist" aria-label="비교 기간">
-    <span>비교 기간</span>
-    <div class="seg">
-      <button role="tab" data-per="1" aria-selected="false">지난주</button>
-      <button role="tab" data-per="4" aria-selected="true">4주</button>
-      <button role="tab" data-per="8" aria-selected="false">8주</button>
-    </div>
-  </div>
-
-  <section class="hero" id="hero" aria-live="polite"></section>
-
-  <section class="disc" id="discWrap" hidden>
-    <h2>새로 포착된 키워드 <span class="badge">자동 수집</span></h2>
-    <p class="hint" id="discHint"></p>
-    <ol class="list" id="disc"></ol>
-  </section>
-
-  <h2 class="boardTitle">주요 시술 순위</h2>
 
   <section class="board">
     <div class="controls">
@@ -45,11 +25,26 @@
         <button role="tab" data-sort="growth" aria-selected="true">많이 오른 순</button>
         <button role="tab" data-sort="index" aria-selected="false">많이 찾는 순</button>
       </div>
+      <div class="per" id="per">
+        <span>비교 기간</span>
+        <div class="pills">
+          <button data-per="1" aria-pressed="false">지난주</button>
+          <button data-per="4" aria-pressed="true">4주</button>
+          <button data-per="8" aria-pressed="false">8주</button>
+        </div>
+      </div>
       <div class="chips" id="chips"></div>
-      <p class="hint">시술을 누르면 16주 흐름과 관심층을 볼 수 있어요</p>
     </div>
-    <ol class="list" id="list"></ol>
+
+    <div class="feature" id="feature" aria-live="polite"></div>
+    <ol class="list" id="list" start="2"></ol>
     <p class="note" id="note"></p>
+  </section>
+
+  <section class="season" id="seasonWrap" hidden>
+    <h2 id="seasonTitle"></h2>
+    <p class="hint" id="seasonHint"></p>
+    <ol class="list" id="season"></ol>
   </section>
 
   <section class="news" id="newsWrap" hidden>

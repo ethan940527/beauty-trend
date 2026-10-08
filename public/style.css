@@ -116,3 +116,14 @@ body.embed .top{display:none}
 }
 .tag{font-style:normal;color:var(--up)}
 .hint{margin:10px 0 0;font-size:12px;color:var(--muted)}
+.stamp{margin:14px 0 0;font-size:13px;color:var(--muted)}
+body.embed .stamp{margin-top:16px}
+.per{display:flex;align-items:center;gap:10px;margin:12px 0 0;font-size:13px;color:var(--muted)}
+.per .seg{background:var(--surface)}
+.per .seg button[aria-selected="true"]{background:var(--bg)}
+.disc{margin:0 -6px 26px;background:var(--surface);border-radius:18px;padding:16px 0 6px}
+.disc h2,.boardTitle{font-size:16px;margin:0;padding:0 14px;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+.boardTitle{padding:0;margin:0 0 10px}
+.disc .hint{padding:0 14px;margin:6px 0 4px}
+.badge{font-size:11px;font-weight:500;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 7px}
+.new{font-style:normal;font-size:10px;font-weight:700;color:var(--up);background:var(--up-soft);border-radius:4px;padding:1px 4px;margin-left:4px;vertical-align:2px}

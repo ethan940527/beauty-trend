@@ -7,7 +7,7 @@
   const esc = (s = '') => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const LOW = 5; // 관심도 5 미만은 표본이 작아 변화율이 크게 튐
   const CHEV = '<svg class="chev" viewBox="0 0 8 14" aria-hidden="true"><path d="M1 1l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  let data, sort = 'growth', cat = '전체', per = 4, showAll = false;
+  let data, sort = 'growth', cat = '전체', per = 1, showAll = false;
   const SHOW = 10;
 
   // 웹뷰에서 외부 링크는 앱에 넘긴다 (RN / iOS WKWebView / Android JS 브리지 순)

@@ -41,13 +41,15 @@
   const md = (iso) => { const d = new Date(iso); return `${d.getMonth() + 1}월 ${d.getDate()}일`; };
   const perLabel = () => (per === 1 ? '지난주' : `최근 ${per}주`);
   const vsLabel = () => (per === 1 ? '그 전주 대비' : `직전 ${per}주 대비`);
-  const idxTxt = (k) => k.index.toFixed(k.index < 10 ? 1 : 0);
+  // 선택한 기간의 평균 관심도 (지난주 = 마지막 1주, 4주·8주 = 최근 N주 평균)
+  const lvl = (k) => { const s = (k.series || []).slice(-per); return s.length ? s.reduce((a, b) => a + b, 0) / s.length : k.index; };
+  const idxTxt = (k) => { const v = lvl(k); return v.toFixed(v < 10 ? 1 : 0); };
   const stamp = (iso) => new Date(iso).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul', month: 'long', day: 'numeric', weekday: 'short', hour: 'numeric', minute: '2-digit' });
 
   // 정렬: 많이 오른 순은 '일시 급등'과 검색량이 너무 적은 시술을 뒤로 보낸다
   function ranked() {
     const ks = data.keywords.filter((k) => cat === '전체' || k.category === cat);
-    if (sort === 'index') return ks.sort((a, b) => b.index - a.index);
+    if (sort === 'index') return ks.sort((a, b) => lvl(b) - lvl(a));
     const tier = (k) => (k.index < LOW || g(k) == null ? 2 : per !== 1 && k.spike ? 1 : 0);
     return ks.sort((a, b) => tier(a) - tier(b) || (g(b) ?? -999) - (g(a) ?? -999));
   }
@@ -67,7 +69,7 @@
     const top = list[0];
 
     // 1위: 목록의 첫 줄을 크게
-    const lead = sort === 'index' ? `${cat === '전체' ? '' : cat + ' 중 '}가장 많이 찾는 시술`
+    const lead = sort === 'index' ? `${perLabel()} ${cat === '전체' ? '' : cat + ' 중 '}가장 많이 찾은 시술`
       : `${perLabel()} ${cat === '전체' ? '' : cat + ' 중 '}가장 많이 찾기 시작한 시술`;
     $('feature').innerHTML = top ? `
       <button class="ftop" data-id="${top.id}">
@@ -75,7 +77,7 @@
         <p class="name">${esc(top.name)}</p>
         <div class="row">
           <span class="${dir(g(top))}">${spark(top.series, 300, 52)}</span>
-          <span class="pct ${sort === 'index' ? 'plain' : ''}">${sort === 'index' ? idxTxt(top) : pct(g(top))}<small>${sort === 'index' ? '관심도 (보톡스 100)' : vsLabel()}</small></span>
+          <span class="pct ${sort === 'index' ? 'plain' : ''}">${sort === 'index' ? idxTxt(top) : pct(g(top))}<small>${sort === 'index' ? `${perLabel()} 관심도 (보톡스 100)` : vsLabel()}</small></span>
         </div>
         <span class="more">추이 · 관심층 자세히 보기 ${CHEV}</span>
       </button>` : '<p class="empty">해당하는 시술이 없어요.</p>';
@@ -91,8 +93,7 @@
         ${CHEV}
       </button></li>`;
     }).join('') + (!showAll && list.length > SHOW ? `<li><button class="moreAll" data-all="1">전체 ${list.length}개 보기</button></li>` : '');
-    $('note').textContent = `관심도는 네이버 검색량을 보톡스 = 100으로 맞춘 상대값이에요. 변화율은 ${perLabel()}와 ${per === 1 ? '그 전주' : `그 전 ${per}주`}를 비교했고, 한 주만 튄 '일시 급등'과 검색량이 아주 적은 시술은 뒤쪽에 두었어요.`;
-    $('per').hidden = sort === 'index';
+    $('note').textContent = `관심도는 네이버 검색량을 보톡스 = 100으로 맞춘 상대값이고, ${perLabel()} ${per === 1 ? '기준' : '평균'}이에요. 변화율은 ${perLabel()}와 ${per === 1 ? '그 전주' : `그 전 ${per}주`}를 비교했고, 한 주만 튄 '일시 급등'과 검색량이 아주 적은 시술은 뒤쪽에 두었어요.`;
 
     // 시즌: 예년에 다음 달 오르던 시술
     const sz = data.season;
